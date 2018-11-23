@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyafs",
-    version="1.0.0",
+    version="1.0.1",
     author="afs",
     author_email="author@example.com",
     description="Lo que el cuerpo necesita",
