@@ -1,5 +1,7 @@
-from ConfigParser import RawConfigParser
+from configparser import RawConfigParser
+
 from pyafs.utiles.IO import IOEscritor
+
 
 #=============================================================================================
 class ConfigManager ():
