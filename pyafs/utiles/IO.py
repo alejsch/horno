@@ -40,7 +40,7 @@ class IOSistema (Singleton):
     #------------------------------------------------------------------------------------------
     def Input(self, msg):
         while True:
-            s = raw_input('%s:' % (msg))
+            s = input('%s:' % (msg))
             if s is not None and len(s.strip()) > 0:
                 return s.strip().upper()
 
@@ -62,7 +62,7 @@ class IOSistema (Singleton):
     #------------------------------------------------------------------------------------------
     def Pausar(self):
         msg = 'Presione una tecla..'
-        raw_input('%s:' % (msg))
+        input('%s:' % (msg))
 
     #------------------------------------------------------------------------------------------
     def MostrarError(self, e):
@@ -136,7 +136,7 @@ class IOSistema (Singleton):
                 self.PrintLine('[COMANDO] %s' % (cmd))
             salida = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
             ok = True
-        except subprocess.CalledProcessError, e:
+        except subprocess.CalledProcessError as e:
             salida = e.output
         finally:
             res['valido'] = res['valido'] and ok
