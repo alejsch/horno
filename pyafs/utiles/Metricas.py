@@ -106,7 +106,7 @@ class Progreso:
     def Incrementar(self):
         
         self._contador = self._contador + 1
-        self._porc_nue = self._contador * 100 / self._total
+        self._porc_nue = int(self._contador * 100 / self._total)
         if self._porc_nue % self._avance == 0 and self._porc_nue != self._porc_ult:
             IOSistema.I().Print('%s%% ' % (self._porc_nue))
             self._porc_ult = self._porc_nue
