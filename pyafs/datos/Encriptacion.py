@@ -87,15 +87,15 @@ class CryptNTLM (Crypt):
     #------------------------------------------------------------------------------------------
     def Encriptar(self, texto, tipo='NT'):
         
-        import smbpasswd # POR SI NO ANDA
+        import passlib.hash # POR SI NO ANDA
 
         if not texto:
             return ''
         
         if tipo == 'NT':
-            return smbpasswd.nthash(texto)
+            return passlib.hash.lmhash.encrypt(texto).upper()
         elif tipo == 'LM':
-            return smbpasswd.lmhash(texto)
+            return passlib.hash.nthash.encrypt(texto).upper()
         else:
             return '?'
     
