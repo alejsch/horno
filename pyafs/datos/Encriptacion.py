@@ -35,12 +35,12 @@ class CryptMD5 (Crypt):
     #------------------------------------------------------------------------------------------
     def Encriptar(self, texto):
         
-        import md5 # POR SI NO ANDA
+        import hashlib # POR SI NO ANDA
         
         if not texto:
             return ''
 
-        return md5.new(texto).hexdigest()
+        return hashlib.md5(texto.encode()).hexdigest()
 
     #------------------------------------------------------------------------------------------
     def Comparar(self, texto, hash_texto):
