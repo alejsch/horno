@@ -180,7 +180,7 @@ class CSVEscritor:
     def EscribirHeader(self):
 
         if self._headerstruc is None:
-            raise RuntimeError, '[ %s ] Error: El _headerstruc no ha sido definido' % (self._archivo)
+            raise RuntimeError('[ %s ] Error: El _headerstruc no ha sido definido' % (self._archivo))
         
         header = []
         for tdato in self._headerstruc:
@@ -212,7 +212,7 @@ class CSVEscritor:
     def EscribirRegistro(self, reg):
         
         if self._headerstruc is None:
-            raise RuntimeError, '[ %s ] Error: El _headerstruc no ha sido definido' % (self._archivo)
+            raise RuntimeError('[ %s ] Error: El _headerstruc no ha sido definido' % (self._archivo))
 
         dato = []
         for tdato in self._headerstruc:
