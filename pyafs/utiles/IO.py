@@ -271,7 +271,8 @@ class IOEscritor:
         msg = Encoding.I().NormalizarTexto(msg)
         
         if newline:
-            self.handle.write('%s %s' % (msg, IOSistema.I().NewLine()))
+            msg_b = bytes('%s %s' % (msg, IOSistema.I().NewLine()), encoding='utf-8')
+            self.handle.write(msg_b)
             if stdout:
                 IOSistema.I().PrintLine(msg)               
         else:
