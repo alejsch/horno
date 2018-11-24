@@ -1,3 +1,4 @@
+from pyafs.utiles.IO import IOSistema
 
 #=============================================================================================
 class Crypt:
@@ -21,7 +22,7 @@ class Crypt:
     def Testear(self, texto):
 
         h = self.Encriptar(texto)
-        print 'Test de [ %s ]: texto = [ %s ] -> hash = [ %s ]; igual? = %s' % (self.Nombre(), texto, h, self.Comparar(texto, h))
+        IOSistema.I().PrintLine('Test de [ %s ]: texto = [ %s ] -> hash = [ %s ]; igual? = %s' % (self.Nombre(), texto, h, self.Comparar(texto, h)))
 
 #=============================================================================================
 class CryptMD5 (Crypt):

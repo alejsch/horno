@@ -167,6 +167,12 @@ class IOLector:
         self.lock_w = Lock()
 
     #------------------------------------------------------------------------------------------
+    @staticmethod
+    def DeRuta(self, ruta):
+        
+        return IOLector(IOArchivo(ruta))
+
+    #------------------------------------------------------------------------------------------
     def __enter__(self):
         
         return self
@@ -220,6 +226,12 @@ class IOEscritor:
         self.handle = None
         self.lock_o = Lock()
         self.lock_w = Lock()
+
+    #------------------------------------------------------------------------------------------
+    @staticmethod
+    def DeRuta(self, ruta):
+        
+        return IOEscritor(IOArchivo(ruta))
 
     #------------------------------------------------------------------------------------------
     def __enter__(self):
