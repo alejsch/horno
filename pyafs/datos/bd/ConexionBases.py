@@ -1,12 +1,16 @@
+import datetime
+import os
+
 from pyafs.datos.Encoding import Encoding
 from pyafs.datos.TiposDeDatos import DatoStr
 from pyafs.utiles.CSV import CSVEscritor
+from pyafs.utiles.IO import IOSistema
 from pyafs.utiles.Metricas import Progreso
-import datetime
+
 import dbfonpy
-import os
 import pyodbc
 import xlrd
+
 
 #=============================================================================================
 class CxBase (object):
@@ -81,8 +85,8 @@ class CxBase (object):
         [columnas, datos, result] = self.RealizarQuery(query_select)
 
         if columnas is None or datos is None:
-            print '[ConexionBases] Warning: (%s) El query no arrojo ningun resultado' % (archivo_csv_output)
-            print '[Result]: %s' % (result)
+            IOSistema.I().PrintLine('[ConexionBases] Warning: (%s) El query no arrojo ningun resultado' % (archivo_csv_output))
+            IOSistema.I().PrintLine('[Result]: %s' % (result))
             columnas = []
             datos = []
 
@@ -221,7 +225,7 @@ class CxBaseExcel (CxBase):
 
             columnas = []
             datos = []
-            for rownum in xrange(sh.nrows):
+            for rownum in range(sh.nrows):
                 if rownum == 0 and self._con_header:
                     columnas = tran(wb, sh, rownum)
                 else:
