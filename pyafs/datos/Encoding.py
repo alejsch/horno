@@ -2,6 +2,7 @@
 # -*- coding: iso-8859-1 -*-
 
 from pyafs.utiles.Singleton import Singleton
+import unidecode
 
 
 @Singleton
@@ -131,6 +132,11 @@ class Encoding (Singleton):
 
     #------------------------------------------------------------------------------------------
     def NormalizarTexto(self, texto):
+
+        return unidecode.unidecode(texto)
+
+    #------------------------------------------------------------------------------------------
+    def NormalizarTextoViejo(self, texto):
 
         if texto is None:
             return texto
