@@ -21,7 +21,8 @@ class IOSistema (Singleton):
     
     #------------------------------------------------------------------------------------------
     def __init__(self):
-        self._en_linux = 'Linux' in self.GetInfoSO()
+        self._en_linux = 'linux' in self.GetInfoSO().lower()
+        self._en_py3 = sys.version_info > (3, 0)
         self._salida = None
         
     #------------------------------------------------------------------------------------------
@@ -40,7 +41,7 @@ class IOSistema (Singleton):
     #------------------------------------------------------------------------------------------
     def Input(self, msg):
         while True:
-            s = input('%s:' % (msg))
+            s = input('%s: ' % (msg))
             if s is not None and len(s.strip()) > 0:
                 return s.strip().upper()
 
@@ -100,6 +101,10 @@ class IOSistema (Singleton):
     #------------------------------------------------------------------------------------------
     def CheckSOEsLinux(self):
         return self._en_linux 
+
+    #------------------------------------------------------------------------------------------
+    def CheckPy3(self):
+        return self._en_py3 
 
     #------------------------------------------------------------------------------------------
     def GetInfoSO(self):
