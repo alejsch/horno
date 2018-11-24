@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
 encoding//pyafs/datos/Encoding.py=iso-8859-1
+encoding//pyafs/datos/bd/dbfonpy.py=utf8

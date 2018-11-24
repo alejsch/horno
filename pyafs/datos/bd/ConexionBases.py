@@ -3,13 +3,10 @@ import os
 
 from pyafs.datos.Encoding import Encoding
 from pyafs.datos.TiposDeDatos import DatoStr
+from pyafs.datos.bd import dbfonpy
 from pyafs.utiles.CSV import CSVEscritor
 from pyafs.utiles.IO import IOSistema
 from pyafs.utiles.Metricas import Progreso
-
-import dbfonpy
-import pyodbc
-import xlrd
 
 
 #=============================================================================================

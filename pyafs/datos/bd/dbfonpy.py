@@ -265,7 +265,7 @@ class Cursor():
      
     def zap(self):
         """ Marks all records as deleted """
-        for i in xrange(len(self._dataset)):
+        for i in range(len(self._dataset)):
             self._dataset[i][0] = True
      
     def pack(self):
@@ -523,7 +523,7 @@ class Connection:
             if len(dbfLine) != self.header['lengthOfData'] or dbfLine[0] == '\x1a':
                 break
             else:
-                appendfuncdynamic(self, dbfLine)
+                eval('appendfuncdynamic(self, dbfLine)')
         f.close()
          
     ### /__init__()
@@ -602,7 +602,7 @@ class Connection:
         # recordset
         dataFieldLength = 1 #delete flag
         _recordset = b''
-        for i in xrange(len(self._recordset)):
+        for i in range(len(self._recordset)):
             _recordset += self._format_COLNAME_put_(self._recordset[i]['name'])
             _recordset += self._recordset[i]['break']
             _recordset += self._recordset[i]['type']
@@ -692,9 +692,9 @@ class Connection:
      
     def _format_C_put_(self, dataString, dataLength):
         if len(dataString) > dataLength:
-            raise DbfOnPyError, 'String is too long: ' + \
+            raise DbfOnPyError( 'String is too long: ' + \
                 str(len(dataString)) + \
-                " (max: " + str(dataLength) +" expected)"
+                " (max: " + str(dataLength) +" expected)")
         dataString = ("% -" + str(dataLength) + "s") % dataString
         return dataString
      
@@ -756,7 +756,7 @@ class Connection:
         is smaller than given as param returned value is right-filled
         with 0x00 bytes. Use Little-endian  byte order."""
         return b''.join([
-            chr((n >> ((l - i - 1) * 8)) % 256) for i in xrange(l)
+            chr((n >> ((l - i - 1) * 8)) % 256) for i in range(l)
         ][::-1])
      
     def _byteToInt_(self, bytes):
@@ -791,19 +791,19 @@ class Connection:
         w przeciwnym wypadku przesyla do konsoli informacje o aktualnej ilosci rekordow.
         """
         if records < 0:
-            print self._byteToInt_(self.header['numberOfRecords'])
+            print(self._byteToInt_(self.header['numberOfRecords']))
         else:
             self.header["numberOfRecords"] = self._intToByte_(records,4)
      
     def _lengthOfData_(self, length = -1):
         if length < 0:
-            print self._byteToInt_(self.header['lengthOfData'])
+            print(self._byteToInt_(self.header['lengthOfData']))
         else:
             self.header["lengthOfData"] = self._intToByte_(length,2)
      
     def _positionFirstData_(self, position = -1):
         if position < 0:
-            print self._byteToInt_(self.header['positionFirstData'])
+            print(self._byteToInt_(self.header['positionFirstData']))
         else:
             self.header["positionFirstData"] = self._intToByte_(position,2)   
 
