@@ -259,7 +259,7 @@ class IOEscritor:
         msg = Encoding.I().NormalizarTexto(msg)
         
         if newline:
-            self.handle.write(msg + IOSistema.I().NewLine())
+            self.handle.write('%s %s' % (msg, IOSistema.I().NewLine()))
             if stdout:
                 IOSistema.I().PrintLine(msg)               
         else:
