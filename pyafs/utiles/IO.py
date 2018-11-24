@@ -168,7 +168,7 @@ class IOLector:
 
     #------------------------------------------------------------------------------------------
     @staticmethod
-    def DeRuta(self, ruta):
+    def DeRuta(ruta):
         
         return IOLector(IOArchivo(ruta))
 
@@ -229,7 +229,7 @@ class IOEscritor:
 
     #------------------------------------------------------------------------------------------
     @staticmethod
-    def DeRuta(self, ruta):
+    def DeRuta(ruta):
         
         return IOEscritor(IOArchivo(ruta))
 
