@@ -15,7 +15,7 @@ class Math:
     #------------------------------------------------------------------------------------------
     @staticmethod
     def IntervaloNA(minimo, maximo, salto=1):
-        return xrange(minimo, maximo, salto)
+        return range(minimo, maximo, salto)
 
     #------------------------------------------------------------------------------------------
     @staticmethod
