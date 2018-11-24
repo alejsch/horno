@@ -52,7 +52,7 @@ class Registro:
     def existe_clave(self, prop):
         
         prop = prop.lower()
-        return self._datos.has_key(prop)
+        return prop in self._datos
 
     #------------------------------------------------------------------------------------------
     def getv(self, prop, valor_default=None):

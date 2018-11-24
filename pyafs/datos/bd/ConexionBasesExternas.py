@@ -25,7 +25,7 @@ class CxBasePostgres (CxBase):
     #------------------------------------------------------------------------------------------
     def Cursor(self, conexion):
 
-        esquema = self.params['schema'] if self.params.has_key('schema') else 'public'
+        esquema = self.params.get('schema', 'public')
 
         cur = conexion.cursor()
         cur.execute('SET search_path TO %s;' % (esquema))

@@ -30,8 +30,7 @@ class CxBase (object):
     #------------------------------------------------------------------------------------------
     def FuentesODBC(self, nombre):
 
-        sources = pyodbc.dataSources()
-        return sources[nombre] if sources.has_key(nombre) else ''
+        return pyodbc.dataSources().get(nombre, '')
 
     #------------------------------------------------------------------------------------------
     def RealizarQueries(self, queries):

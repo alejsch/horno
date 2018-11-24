@@ -27,7 +27,7 @@ class Listas (Singleton):
     #------------------------------------------------------------------------------------------
     def ElegirValor(self, key, default, dic):
         
-        return dic[key] if dic.has_key(key) else default
+        return dic.get(key, default)
 
     #------------------------------------------------------------------------------------------
     def ElegirPrimeroNoVacio(self, default, lista):

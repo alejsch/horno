@@ -49,7 +49,7 @@ class CSVLector:
 
     #------------------------------------------------------------------------------------------
     def ClaveExiste(self, key):
-        return self._datos.has_key(key)
+        return key in self._datos
             
     #------------------------------------------------------------------------------------------
     def RegistrosExisten(self, key):
@@ -128,7 +128,7 @@ class CSVLector:
 
                     reg = self.RegistroUsandoDato(dato)
                     key = self._func_reg_id(reg)
-                    if not self._datos.has_key(key):
+                    if key not in self._datos:
                         self._datos[key] = []
                     else:
                         info['reg_repetidos'].append(reg)
