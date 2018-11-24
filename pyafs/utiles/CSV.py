@@ -75,7 +75,7 @@ class CSVLector:
             for dato in self._datos[key]:
                 reg = self.RegistroUsandoDato(dato)
                 reg_cumple = True
-                for (k, v) in dic_prop_valor.iteritems():
+                for (k, v) in dic_prop_valor.items():
                     if reg.getv(k) != v:
                         reg_cumple = False
                         break

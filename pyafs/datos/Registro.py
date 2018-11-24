@@ -8,14 +8,14 @@ class Registro:
         self.valor_default = valor_default
         self._datos = dict()
         if datos is not None:
-            for (k, v) in datos.iteritems():
+            for (k, v) in datos.items():
                 self._datos[str(k).lower()] = v
 
     #------------------------------------------------------------------------------------------
     def __str__(self):
         
         res = '\n'
-        for (k, v) in sorted(self._datos.iteritems(), key=lambda p: p[0]):
+        for (k, v) in sorted(self._datos.items(), key=lambda p: p[0]):
             res += '[%s] = %s\n' % (k, v)
         return res
 
@@ -43,7 +43,7 @@ class Registro:
     def copia(self):
         
         reg = Registro()
-        for (k, v) in self._datos.iteritems():
+        for (k, v) in self._datos.items():
             reg.setv(k, v)
         
         return reg

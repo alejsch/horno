@@ -136,7 +136,7 @@ class Encoding (Singleton):
             return texto
         
         texto = self.ToUnicode(texto)
-        for (k, v) in self.TablaTran.iteritems():
+        for (k, v) in self.TablaTran.items():
             texto = texto.replace(self.ToUnicode(k), self.ToUnicode(v))
 
         return self.ToString(texto)
