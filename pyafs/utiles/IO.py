@@ -137,25 +137,38 @@ class IOSistema (Singleton):
         return '\n' if self._en_linux else '\r\n'
 
     #------------------------------------------------------------------------------------------
-    def EjecutarComando(self, cmd, verbose=False, logueador=None, log_append=True):
-        res = {'valido':True, 'salida':''}
+    def EjecutarEnSO(self, comandos, verbose=False, logueador=None, log_append=True):
+        
+        res = {'ok':True, 'salida':''}
+        comandos_str = ' '.join(comandos)
+        salida = ''
+        ok = True
         
         try:
-            salida = ''
-            ok = False
             if verbose:
-                self.PrintLine('[COMANDO] %s' % (cmd))
-            salida = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT)
-            ok = True
+                self.PrintLine('[comando in] %s' % (comandos_str))
+            if self.CheckSOEsLinux() or len(comandos) == 1:
+                salida = os.system(' '.join(comandos))
+            else:
+                salida = subprocess.check_output(comandos, shell=True, stderr=subprocess.STDOUT)
+                #salida = subprocess.call(comandos)
+                
         except subprocess.CalledProcessError as e:
             salida = e.output
+            ok = False
+        except OSError as e:
+            salida = str(e)
+            ok = False
+            
         finally:
-            res['valido'] = res['valido'] and ok
+            res['ok'] = res['ok'] and ok
             res['salida'] = salida
+            if verbose:
+                IOSistema.I().PrintLine('[comando out]', ok, salida)            
             if logueador:
                 fecha = datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
                 sep = '=' * self.CharSep()
-                logueador.EscribirExpress((sep + '\n[FECHA]\n%s\n[COMANDO]\n%s\n' + sep + '\n[SALIDA]\n%s\n' + sep + '\n') % (fecha, cmd, salida), log_append, False)
+                logueador.EscribirExpress((sep + '\n[FECHA]\n%s\n[COMANDO]\n%s\n' + sep + '\n[SALIDA]\n%s\n' + sep + '\n') % (fecha, comandos_str, salida), log_append, False)
                     
         return res
 
