@@ -76,10 +76,16 @@ class IOSistema (Singleton):
         return error 
 
     #------------------------------------------------------------------------------------------
-    def ObtenerUltimoError(self):
+    def ObtenerUltimoError(self, ret=True):
         
-        error = '[EXCEPTION LAST] ' + traceback.format_exc() 
-        return error 
+        if ret:
+            error = '[EXCEPTION LAST] ' + traceback.format_exc() 
+            return error 
+        else:
+            exc_info = sys.exc_info()
+            traceback.print_exception(*exc_info)
+            del exc_info
+            return None
 
     #------------------------------------------------------------------------------------------
     def MostrarTitulo(self, txt, sep='-'):
