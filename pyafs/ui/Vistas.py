@@ -1,7 +1,8 @@
 import re
-from PyQt4 import QtGui, QtCore
 
+from PyQt4 import QtGui, QtCore
 from pyafs.datos.Encoding import Encoding
+from pyafs.utiles.IO import IOSistema
 
 
 #==============================================================================================================================
@@ -166,7 +167,7 @@ class VistaGraficaHelper:
         
         with open(ruta_csv, 'wb') as io:
             
-            columnas = [unicode(tbl.horizontalHeaderItem(i).text()) for i in xrange(tbl.columnCount())]
+            columnas = [self.AUnicode(tbl.horizontalHeaderItem(i).text()) for i in range(tbl.columnCount())]
             
             header = sep.join([quo + c.replace(quo, quo * 2) + quo for c in columnas])
             io.write(Encoding.I().ToString(header + u'\n'))
@@ -175,7 +176,7 @@ class VistaGraficaHelper:
                 fila = []
                 for c in range(tbl.columnCount()):
                     item = tbl.item(f, c)
-                    fila.append(unicode(item.text()) if item is not None else '')
+                    fila.append(self.AUnicode(item.text()) if item is not None else '')
                 
                 datos = sep.join([quo + d.replace(quo, quo * 2) + quo for d in fila])
                 io.write(Encoding.I().ToString(datos + u'\n'))
@@ -189,7 +190,7 @@ class VistaGraficaHelper:
             fila = []
             for c in range(tbl.columnCount()):
                 item = tbl.item(f, c)
-                fila.append(unicode(item.text()).strip() if item is not None else '')
+                fila.append(self.AUnicode(item.text()).strip() if item is not None else '')
             res.append(fila)
             
         return res
@@ -198,8 +199,8 @@ class VistaGraficaHelper:
     def ObtenerTexto(self, txt, selected=False, solo_ascii=False):
 
         valor = ''
-        if selected: valor = unicode(txt.textCursor().selectedText())
-        if not selected or not valor: valor = unicode(txt.toPlainText())
+        if selected: valor = self.AUnicode(txt.textCursor().selectedText())
+        if not selected or not valor: valor = self.AUnicode(txt.toPlainText())
         if solo_ascii: valor = re.sub(r'[^\x00-\x7F]+',' ', valor)
         return valor
 
@@ -225,6 +226,11 @@ class VistaGraficaHelper:
         valor = str(item.text()) if item else ''
         return valor
 
+    #------------------------------------------------------------------------------------------
+    def AUnicode(self, txt):
+        
+        return txt # unicode(txt)
+        
 
 #==============================================================================================================================
 class VistaConsolaBase (object):
@@ -238,5 +244,5 @@ class VistaConsolaBase (object):
     #------------------------------------------------------------------------------------------
     def Mostrar(self):
         
-        print 'Hola, soy una VistaConsolaBase y me estoy mostrando'
+        IOSistema.I().PrintLine('Hola, soy una VistaConsolaBase y me estoy mostrando')
 
