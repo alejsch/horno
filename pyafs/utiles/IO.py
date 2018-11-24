@@ -48,15 +48,21 @@ class IOSistema (Singleton):
     #------------------------------------------------------------------------------------------
     def PrintLine(self, texto):
         if self._salida is None:
-            print(texto)
+            try:
+                print(texto)
+            except:
+                pass
         else:
             self._salida.PrintLine(texto)
 
     #------------------------------------------------------------------------------------------
     def Print(self, texto):
         if self._salida is None:
-            print(texto, end='')
-            sys.stdout.flush()
+            try:
+                print(texto, end='')
+                sys.stdout.flush()
+            except:
+                pass
         else:
             self._salida.Print(texto)
 
