@@ -164,7 +164,7 @@ class IOSistema (Singleton):
             res['ok'] = res['ok'] and ok
             res['salida'] = salida
             if verbose:
-                IOSistema.I().PrintLine('[comando out]', ok, salida)            
+                IOSistema.I().PrintLine('[comando out] %s\n%s\n' % (ok, salida))            
             if logueador:
                 fecha = datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
                 sep = '=' * self.CharSep()
