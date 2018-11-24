@@ -150,7 +150,8 @@ class Encoding (Singleton):
     def ToUnicode(self, dato, code='latin1'):
 
         try:        
-            return dato if isinstance(dato, unicode) else str(dato).decode(code)
+            #return dato if isinstance(dato, unicode) else str(dato).decode(code)
+            return dato
         except:
             return '<ERROR_ENC_UNI>'
      
@@ -158,7 +159,8 @@ class Encoding (Singleton):
     def ToString(self, dato, code='latin1'):
 
         try:        
-            return dato.encode(code) if isinstance(dato, unicode) else str(dato)
+            #return dato.encode(code) if isinstance(dato, unicode) else str(dato)
+            return dato
         except:
             return '<ERROR_ENC_STR>'
 
