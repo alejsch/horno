@@ -163,14 +163,14 @@ class VistaGraficaHelper:
     #------------------------------------------------------------------------------------------
     def GuardarTabla(self, tbl, ruta_csv):
         
-        sep = u','; quo = u'"'
+        sep = ','; quo = '"'
         
         with open(ruta_csv, 'wb') as io:
             
             columnas = [self.AUnicode(tbl.horizontalHeaderItem(i).text()) for i in range(tbl.columnCount())]
             
             header = sep.join([quo + c.replace(quo, quo * 2) + quo for c in columnas])
-            io.write(Encoding.I().ToString(header + u'\n'))
+            io.write(Encoding.I().ToString(header + '\n'))
             
             for f in range(tbl.rowCount()):
                 fila = []
@@ -179,7 +179,7 @@ class VistaGraficaHelper:
                     fila.append(self.AUnicode(item.text()) if item is not None else '')
                 
                 datos = sep.join([quo + d.replace(quo, quo * 2) + quo for d in fila])
-                io.write(Encoding.I().ToString(datos + u'\n'))
+                io.write(Encoding.I().ToString(datos + '\n'))
                                 
     #------------------------------------------------------------------------------------------
     def ObtenerTabla(self, tbl):
