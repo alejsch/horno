@@ -163,7 +163,8 @@ class VistaGraficaHelper:
     #------------------------------------------------------------------------------------------
     def GuardarTabla(self, tbl, ruta_csv):
         
-        sep = ','; quo = '"'
+        sep = ','
+        quo = '"'
         
         with open(ruta_csv, 'wb') as io:
             
