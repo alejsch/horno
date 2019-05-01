@@ -30,7 +30,7 @@ class ConfigManager ():
         
         archivo.CarpetaPadre().Crear()
         
-        with IOEscritor(archivo).Abrir(False) as iow:
+        with IOEscritor(archivo).Abrir(False, binario=False) as iow:
             self._parser.write(iow.Stream())
 
     #------------------------------------------------------------------------------------------
