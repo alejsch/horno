@@ -212,9 +212,9 @@ class IOLector:
         return self.handle
 
     #------------------------------------------------------------------------------------------
-    def Abrir(self):
+    def Abrir(self, binario=True):
         
-        self.handle = open(self.archivo.Ruta(), 'rb')
+        self.handle = open(self.archivo.Ruta(), 'r' + ('b' if binario else ''))
         return self
         
     #------------------------------------------------------------------------------------------
@@ -273,9 +273,9 @@ class IOEscritor:
         return self.handle
     
     #------------------------------------------------------------------------------------------
-    def Abrir(self, append=True):
+    def Abrir(self, append=True, binario=True):
         
-        self.handle = open(self.archivo.Ruta(), 'a+b' if append else 'wb')
+        self.handle = open(self.archivo.Ruta(), ('a+' if append else 'w') + ('b' if binario else ''))
         return self
         
     #------------------------------------------------------------------------------------------
