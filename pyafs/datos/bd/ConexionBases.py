@@ -7,6 +7,9 @@ from pyafs.datos.bd import dbfonpy
 from pyafs.utiles.CSV import CSVEscritor
 from pyafs.utiles.IO import IOSistema
 from pyafs.utiles.Metricas import Progreso
+import xlrd
+
+import pyodbc
 
 
 #=============================================================================================
