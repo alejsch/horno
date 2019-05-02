@@ -352,6 +352,6 @@ class DatoCuit (DatoInt):
             return False
         
         val1 = 0
-        for n in xrange(len(coefs)): val1 += int(coefs[n]) * int(serial[n])
+        for n in range(len(coefs)): val1 += int(coefs[n]) * int(serial[n])
         val2 = (11 - val1 % 11) % 11
         return int(serial[-1]) == val2 
