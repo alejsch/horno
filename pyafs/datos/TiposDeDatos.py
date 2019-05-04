@@ -343,7 +343,7 @@ class DatoCuit (DatoInt):
         
         serial = self.Serializar(dato)
         coefs = '54327654320'
-        prefs_validos = [20, 23, 24, 27, 30, 33, 34]
+        prefs_validos = [20, 23, 24, 27, 30, 33, 34, 50, 55]
         
         if len(serial.replace('-', '')) > 11:
             return False
