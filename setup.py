@@ -19,6 +19,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'bcrypt', 'passlib', 'unidecode', 'libxml2', 'libxslt', 'lxml',
+        'bcrypt', 'passlib', 'unidecode', 'libxml2-dev', 'libxslt-dev', 'python-dev', 'lxml',
     ],                 
 )
