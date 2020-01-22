@@ -5,8 +5,7 @@ from pyafs.utiles.Singleton import Singleton
 import unidecode
 
 
-@Singleton
-class Encoding (Singleton):
+class Encoding (metaclass=Singleton):
 
     #------------------------------------------------------------------------------------------
     def __init__(self):

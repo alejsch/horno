@@ -1,10 +1,11 @@
-from Queue import Queue
-from pyafs.utiles.Singleton import Singleton
+from queue import Queue
 from threading import Thread
 
+from pyafs.utiles.Singleton import Singleton
+
+
 #===================================================================================================
-@Singleton
-class ThreadManager (Singleton):
+class ThreadManager (metaclass=Singleton):
 
     #------------------------------------------------------------------------------------------
     def __init__(self):
@@ -58,6 +59,6 @@ class ThreadManager (Singleton):
         try:
             func(*params)
         except Exception as e:
-            print str(type(e)), ':', str(e)
+            print('%s: %s' % (str(type(e)), str(e)))
         finally:
             self.cur_threads = self.cur_threads-1

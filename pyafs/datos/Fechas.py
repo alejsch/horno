@@ -1,5 +1,8 @@
 import datetime
 
+from dateutil import parser
+
+
 class Fecha:
 
     #------------------------------------------------------------------------------------------
@@ -72,7 +75,7 @@ class Fecha:
     def DesdeIso(fecha_iso, default=None):
         
         try:
-            date = dateutil.parser.parse(fecha_iso)
+            date = parser.parse(fecha_iso)
         except Exception as e:
             date = default
         finally:
@@ -143,6 +146,11 @@ class Fecha:
     def AStringConFormatoDefault(self):
         
         return self.AStringConFormato('%d/%m/%Y')
+
+    #------------------------------------------------------------------------------------------
+    def to_unix(self):
+        
+        return self._fecha.timestamp()
 
     #------------------------------------------------------------------------------------------
     def to_human(self, formato_out='%a %d %b %Y, %H:%M'):

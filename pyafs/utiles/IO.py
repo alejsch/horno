@@ -16,8 +16,7 @@ from pyafs.utiles.Singleton import Singleton
 
 
 #==========================================================================================
-@Singleton
-class IOSistema (Singleton):
+class IOSistema (metaclass=Singleton):
     
     #------------------------------------------------------------------------------------------
     def __init__(self):

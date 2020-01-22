@@ -1,11 +1,12 @@
+import sys
+
 from PyQt4 import QtGui, Qt, QtCore
 from pyafs.utiles.IO import IOSistema
 from pyafs.utiles.Singleton import Singleton
-import sys
+
 
 #=============================================================================================
-@Singleton
-class UIControles (Singleton):
+class UIControles (metaclass=Singleton):
    
     #------------------------------------------------------------------------------------------
     def __init__(self):

@@ -1,9 +1,10 @@
-from pyafs.utiles.Singleton import Singleton
 import re
 
+from pyafs.utiles.Singleton import Singleton
+
+
 #=============================================================================================
-@Singleton
-class Textos (Singleton):
+class Textos (metaclass=Singleton):
 
     #------------------------------------------------------------------------------------------
     def __init__(self):
@@ -16,8 +17,7 @@ class Textos (Singleton):
         return not re.match(".*[0-9]+.*", texto) is None
 
 #=============================================================================================
-@Singleton
-class Listas (Singleton):
+class Listas (metaclass=Singleton):
 
     #------------------------------------------------------------------------------------------
     def __init__(self):

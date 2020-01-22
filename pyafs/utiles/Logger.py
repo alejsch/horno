@@ -1,9 +1,10 @@
 from pyafs.utiles.IO import IOEscritor, IOArchivo, IOSistema
 from pyafs.utiles.Singleton import Singleton
 
+
 #================================================================================================
 @Singleton
-class Logger (Singleton):
+class Logger (metaclass=Singleton):
     
     #------------------------------------------------------------------------------------------
     def __init__(self):

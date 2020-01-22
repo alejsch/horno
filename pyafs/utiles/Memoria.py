@@ -1,9 +1,10 @@
-from pyafs.utiles.Singleton import Singleton
 import psutil
+from pyafs.utiles.Singleton import Singleton
+
 
 #==========================================================================================
 @Singleton
-class Memoria (Singleton):
+class Memoria (metaclass=Singleton):
     
     #------------------------------------------------------------------------------------------
     def __init__(self):

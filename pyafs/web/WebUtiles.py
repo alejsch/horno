@@ -3,9 +3,9 @@ import html
 import lxml.html
 from pyafs.utiles.Singleton import Singleton
 
+
 #==============================================================================================
-@Singleton
-class HtmlHelper (Singleton):
+class HtmlHelper (metaclass=Singleton):
     
     #------------------------------------------------------------------------------------------
     def __init__(self):

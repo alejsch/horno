@@ -1,4 +1,15 @@
-class Singleton:
+#=============================================================================================
+class Singleton(type):
+    
+    _instances = {}
+    
+    def __call__(self, *args, **kwargs):
+        if self not in self._instances:
+            self._instances[self] = super().__call__(*args, **kwargs)
+        return self._instances[self]
+
+#=============================================================================================
+class SingletonViejo:
     """
     A non-thread-safe helper class to ease implementing singletons.
     This should be used as a decorator -- not a metaclass -- to the
