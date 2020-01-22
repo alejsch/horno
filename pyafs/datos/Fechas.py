@@ -21,6 +21,16 @@ class Fecha:
             return 0
 
     #------------------------------------------------------------------------------------------
+    def __repr__(self):
+        
+        return str(self)
+
+    #------------------------------------------------------------------------------------------
+    def __str__(self):
+        
+        return self.to_human()
+
+    #------------------------------------------------------------------------------------------
     def Date(self):
         
         return self._fecha
@@ -49,7 +59,35 @@ class Fecha:
     @staticmethod
     def Ahora():
         
-        return Fecha( datetime.datetime.now() )
+        return Fecha(datetime.datetime.now())
+
+    #------------------------------------------------------------------------------------------
+    @staticmethod
+    def Hoy():
+
+        return Fecha.Ahora().get_date()         
+
+    #------------------------------------------------------------------------------------------
+    @staticmethod
+    def DesdeIso(fecha_iso, default=None):
+        
+        try:
+            date = dateutil.parser.parse(fecha_iso)
+        except Exception as e:
+            date = default
+        finally:
+            return Fecha(date)
+
+    #------------------------------------------------------------------------------------------
+    @staticmethod
+    def DesdeUnix(fecha_unix, default=None):
+        
+        try:
+            date = datetime.datetime.utcfromtimestamp(int(fecha_unix)/1000)
+        except Exception as e:
+            date = default
+        finally:
+            return Fecha(date)
 
     #------------------------------------------------------------------------------------------
     @staticmethod
@@ -105,4 +143,20 @@ class Fecha:
     def AStringConFormatoDefault(self):
         
         return self.AStringConFormato('%d/%m/%Y')
+
+    #------------------------------------------------------------------------------------------
+    def to_human(self, formato_out='%a %d %b %Y, %H:%M'):
+        
+        weekday = {'sun': 'dom', 'mon': 'lun', 'tue': 'mar', 'wed': 'mie', 'thu': 'jue', 'fri': 'vie', 'sat': 'sab'}
+        month = {'jan': 'ene', 'feb': 'feb', 'mar': 'mar', 'apr': 'abr', 'may': 'may', 'jun': 'jun',
+                 'jul': 'jul', 'aug': 'ago', 'sep': 'sep', 'oct': 'oct', 'nov': 'nov', 'dec': 'dic'}
+
+        fecha_orig = self._fecha.strftime(formato_out)
+        try:
+            fecha_part = fecha_orig.split(' ')
+            fecha_part[0] = weekday.get(fecha_part[0].lower(), fecha_part[0].lower()) 
+            fecha_part[2] = month.get(fecha_part[2].lower(), fecha_part[2].lower())
+            return ' '.join(fecha_part)
+        except:
+            return fecha_orig
 
