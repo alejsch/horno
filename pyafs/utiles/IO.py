@@ -34,7 +34,6 @@ class IOSistema (metaclass=Singleton):
 
     #------------------------------------------------------------------------------------------
     def Usuario(self):
-        
         return getpass.getuser()
 
     #------------------------------------------------------------------------------------------
@@ -110,6 +109,17 @@ class IOSistema (metaclass=Singleton):
     #------------------------------------------------------------------------------------------
     def CheckPy3(self):
         return self._en_py3 
+
+    #------------------------------------------------------------------------------------------
+    def CheckDocker(self):
+        if self.CheckSOEsLinux():
+            with open('/proc/self/cgroup', 'r') as ior:
+                for line in ior:
+                    if 'docker' in line.strip().split('/'):
+                        return True
+            return False
+        else:
+            return False
 
     #------------------------------------------------------------------------------------------
     def GetInfoSO(self):
