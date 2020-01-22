@@ -51,36 +51,55 @@ class Performance:
 
         self._msg = msg
         self.gmt_delta_hours = gmt_delta_hours
+        self.tiempo_ini = None 
+        self.tiempo_fin = None 
+
+    #------------------------------------------------------------------------------------------
+    def __enter__(self):
+        
+        self.Iniciar()
+        return self
+
+    #------------------------------------------------------------------------------------------
+    def __exit__(self, type, value, tb):
+        
+        self.Finalizar()
 
     #------------------------------------------------------------------------------------------
     def FechaAString(self, fecha):
-        
+
         gmt_str = ' GMT%s%s' % ('+' if self.gmt_delta_hours >= 0 else '', self.gmt_delta_hours)
         return fecha.strftime("%d %b %Y %H:%M:%S" + gmt_str)
 
     #------------------------------------------------------------------------------------------
     def TimespanAString(self, span):
-        
+
         partes = str(span).split(':')
         return '%s h, %s m, %s s' % (int(partes[0]), int(partes[1]), int(partes[2].split('.')[0]))
 
     #------------------------------------------------------------------------------------------
     def FechaAGMT(self, fecha):
-        
+
         sys_delta_hours = -time.timezone / 3600
-        return fecha + datetime.timedelta(hours=(self.gmt_delta_hours - sys_delta_hours)) 
-    
+        return fecha + datetime.timedelta(hours=(self.gmt_delta_hours - sys_delta_hours))
+
     #------------------------------------------------------------------------------------------
     def Iniciar(self):
-        
+
         self.tiempo_ini = self.FechaAGMT(datetime.datetime.now())
         IOSistema().PrintLine('(t) [%s] INI %s' % (self._msg, self.FechaAString(self.tiempo_ini)))
            
     #------------------------------------------------------------------------------------------
     def Finalizar(self):
+
+        self.tiempo_fin = self.FechaAGMT(datetime.datetime.now())
         
-        tiempo_fin = self.FechaAGMT(datetime.datetime.now())
-        IOSistema().PrintLine('(t) [%s] FIN %s (%s)' % (self._msg, self.FechaAString(tiempo_fin), self.TimespanAString(tiempo_fin - self.tiempo_ini)))
+        IOSistema().PrintLine('(t) [%s] FIN %s (%s)' % (self._msg, self.FechaAString(self.tiempo_fin), self.TimespanAString(self.tiempo_fin - self.tiempo_ini)))
+
+    #------------------------------------------------------------------------------------------
+    def TiempoAStr(self, obs=''):
+
+        return '%s' % (self.TimespanAString(self.tiempo_fin - self.tiempo_ini))
 
 
 #===================================================================================================
@@ -93,14 +112,28 @@ class Progreso:
         self._contador = 0
         self._avance = avance
         self._total = total
+        self._mensaje = mensaje
         self._porc_ult = -1
         self._porc_nue = -1
+
+    #------------------------------------------------------------------------------------------
+    def __enter__(self):
         
-        IOSistema().Print('%s (%s).. ' % (mensaje, self._total))
+        self.Iniciar()
+        return self
+
+    #------------------------------------------------------------------------------------------
+    def __exit__(self, type, value, tb):
+        
+        self.Finalizar()
+
+    #------------------------------------------------------------------------------------------
+    def Iniciar(self):
+
+        IOSistema().Print('%s (%s).. ' % (self._mensaje, self._total))
         
         if self._porc_ult >= 100 or self._total <= 0:
-            self._finalizado = True
-            IOSistema().PrintLine('[OK]')
+            self.Finalizar()
 
     #------------------------------------------------------------------------------------------
     def Incrementar(self):
@@ -111,8 +144,7 @@ class Progreso:
             IOSistema().Print('%s%% ' % (self._porc_nue))
             self._porc_ult = self._porc_nue
         if self._porc_ult >= 100:
-            self._finalizado = True
-            IOSistema().PrintLine('[OK]')
+            self.Finalizar()
 
     #------------------------------------------------------------------------------------------
     def Finalizar(self):
