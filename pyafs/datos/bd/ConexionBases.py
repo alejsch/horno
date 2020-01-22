@@ -50,7 +50,7 @@ class CxBase (object):
                 
                 if query.strip().upper().startswith('SELECT'): 
                     datos = curs.fetchall()
-                    columnas = Encoding.I().NormalizarLista([ d[0] for d in curs.description ])
+                    columnas = Encoding().NormalizarLista([ d[0] for d in curs.description ])
                     conn.commit()
                 else:
                     datos = [];
@@ -84,8 +84,8 @@ class CxBase (object):
         [columnas, datos, result] = self.RealizarQuery(query_select)
 
         if columnas is None or datos is None:
-            IOSistema.I().PrintLine('[ConexionBases] Warning: (%s) El query no arrojo ningun resultado' % (archivo_csv_output))
-            IOSistema.I().PrintLine('[Result]: %s' % (result))
+            IOSistema().PrintLine('[ConexionBases] Warning: (%s) El query no arrojo ningun resultado' % (archivo_csv_output))
+            IOSistema().PrintLine('[Result]: %s' % (result))
             columnas = []
             datos = []
 
@@ -210,7 +210,7 @@ class CxBaseExcel (CxBase):
                         elif cell.ctype == xlrd.XL_CELL_NUMBER and cell.value.is_integer():
                             val = int(cell.value)
                         elif cell.ctype == xlrd.XL_CELL_TEXT:
-                            val = Encoding.I().NormalizarTexto(cell.value)
+                            val = Encoding().NormalizarTexto(cell.value)
                         else:
                             val = cell.value
                     except Exception as e2:

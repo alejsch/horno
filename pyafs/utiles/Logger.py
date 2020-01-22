@@ -24,14 +24,14 @@ class Logger (metaclass=Singleton):
     #------------------------------------------------------------------------------------------
     def Log(self, texto, printear=True):
         if printear:
-            IOSistema.I().PrintLine(texto)
+            IOSistema().PrintLine(texto)
             
         with IOEscritor(self.archivo_log).Abrir(True) as iow:
             iow.EscribirLinea(texto)            
 
     #------------------------------------------------------------------------------------------
     def LogSep(self, texto, printear=True):
-        self.Log('=' * IOSistema.I().CharSep(), printear)
+        self.Log('=' * IOSistema().CharSep(), printear)
         self.Log('%s' % texto, printear)
-        self.Log('=' * IOSistema.I().CharSep(), printear)
+        self.Log('=' * IOSistema().CharSep(), printear)
     

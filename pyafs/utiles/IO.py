@@ -135,7 +135,7 @@ class IOSistema (metaclass=Singleton):
 
     #------------------------------------------------------------------------------------------
     def DevNull(self):
-        return IOArchivo('/dev/null' if IOSistema.I().CheckSOEsLinux() else 'nul')
+        return IOArchivo('/dev/null' if IOSistema().CheckSOEsLinux() else 'nul')
 
     #------------------------------------------------------------------------------------------
     def NewLine(self):
@@ -169,7 +169,7 @@ class IOSistema (metaclass=Singleton):
             res['ok'] = res['ok'] and ok
             res['salida'] = salida
             if verbose:
-                IOSistema.I().PrintLine('[comando out] %s\n%s\n' % (ok, salida))            
+                IOSistema().PrintLine('[comando out] %s\n%s\n' % (ok, salida))            
             if logueador:
                 fecha = datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
                 sep = '=' * self.CharSep()
@@ -225,7 +225,7 @@ class IOLector:
     def Leer(self):
         
         if self.handle is None:
-            IOSistema.I().PrintLine('(!) Error: el archivo %s no se ha abierto' % (self.ruta))
+            IOSistema().PrintLine('(!) Error: el archivo %s no se ha abierto' % (self.ruta))
             return
         
         return self.handle.read()
@@ -234,7 +234,7 @@ class IOLector:
     def LeerLinea(self):
         
         if self.handle is None:
-            IOSistema.I().PrintLine('(!) Error: el archivo %s no se ha abierto' % (self.ruta))
+            IOSistema().PrintLine('(!) Error: el archivo %s no se ha abierto' % (self.ruta))
             return
         
         return self.handle.readline()
@@ -286,22 +286,22 @@ class IOEscritor:
     def Escribir(self, msg, stdout=False, newline=False):
 
         if self.handle is None:
-            IOSistema.I().PrintLine('(!) Error: el archivo %s no se ha abierto' % (self.ruta))
+            IOSistema().PrintLine('(!) Error: el archivo %s no se ha abierto' % (self.ruta))
             return
 
         self.lock_w.acquire()
 
-        msg = Encoding.I().NormalizarTexto(msg)
+        msg = Encoding().NormalizarTexto(msg)
         
         if newline:
-            msg_b = bytes('%s %s' % (msg, IOSistema.I().NewLine()), encoding='utf-8')
+            msg_b = bytes('%s %s' % (msg, IOSistema().NewLine()), encoding='utf-8')
             self.handle.write(msg_b)
             if stdout:
-                IOSistema.I().PrintLine(msg)               
+                IOSistema().PrintLine(msg)               
         else:
             self.handle.write(msg)
             if stdout:
-                IOSistema.I().Print(msg)
+                IOSistema().Print(msg)
                 
         self.lock_w.release()               
 
@@ -338,7 +338,7 @@ class IOArchivo:
 
     #------------------------------------------------------------------------------------------
     def RutaEnSO(self):
-        return self.ruta if IOSistema.I().CheckSOEsLinux() else self.ruta.replace('/', '\\')
+        return self.ruta if IOSistema().CheckSOEsLinux() else self.ruta.replace('/', '\\')
 
     #------------------------------------------------------------------------------------------
     def Nombre(self):
@@ -393,7 +393,7 @@ class IOArchivo:
             if self.Existe():
                 os.remove(self.ruta)
         except:
-            IOSistema.I().PrintLine('(!) Error: el archivo %s no se ha borrado' % (self.ruta))
+            IOSistema().PrintLine('(!) Error: el archivo %s no se ha borrado' % (self.ruta))
             
     #------------------------------------------------------------------------------------------
     def Copiar(self, ruta_hasta):
@@ -429,7 +429,7 @@ class IOArchivo:
 
         #normalizar caracteres extendidos
         if normalizar:
-            datos = Encoding.I().NormalizarTexto(datos)
+            datos = Encoding().NormalizarTexto(datos)
         
         with IOEscritor(self).Abrir(False) as iow:
             iow.Escribir(datos)
@@ -468,4 +468,4 @@ class IOCarpeta(IOArchivo):
             if self.Existe():
                 shutil.rmtree(self.ruta)
         except:
-            IOSistema.I().PrintLine('(!) Error: la carpeta %s no se ha borrado' % (self.ruta))
+            IOSistema().PrintLine('(!) Error: la carpeta %s no se ha borrado' % (self.ruta))

@@ -74,13 +74,13 @@ class Performance:
     def Iniciar(self):
         
         self.tiempo_ini = self.FechaAGMT(datetime.datetime.now())
-        IOSistema.I().PrintLine('(t) [%s] INI %s' % (self._msg, self.FechaAString(self.tiempo_ini)))
+        IOSistema().PrintLine('(t) [%s] INI %s' % (self._msg, self.FechaAString(self.tiempo_ini)))
            
     #------------------------------------------------------------------------------------------
     def Finalizar(self):
         
         tiempo_fin = self.FechaAGMT(datetime.datetime.now())
-        IOSistema.I().PrintLine('(t) [%s] FIN %s (%s)' % (self._msg, self.FechaAString(tiempo_fin), self.TimespanAString(tiempo_fin - self.tiempo_ini)))
+        IOSistema().PrintLine('(t) [%s] FIN %s (%s)' % (self._msg, self.FechaAString(tiempo_fin), self.TimespanAString(tiempo_fin - self.tiempo_ini)))
 
 
 #===================================================================================================
@@ -96,11 +96,11 @@ class Progreso:
         self._porc_ult = -1
         self._porc_nue = -1
         
-        IOSistema.I().Print('%s (%s).. ' % (mensaje, self._total))
+        IOSistema().Print('%s (%s).. ' % (mensaje, self._total))
         
         if self._porc_ult >= 100 or self._total <= 0:
             self._finalizado = True
-            IOSistema.I().PrintLine('[OK]')
+            IOSistema().PrintLine('[OK]')
 
     #------------------------------------------------------------------------------------------
     def Incrementar(self):
@@ -108,18 +108,18 @@ class Progreso:
         self._contador = self._contador + 1
         self._porc_nue = int(self._contador * 100 / self._total)
         if self._porc_nue % self._avance == 0 and self._porc_nue != self._porc_ult:
-            IOSistema.I().Print('%s%% ' % (self._porc_nue))
+            IOSistema().Print('%s%% ' % (self._porc_nue))
             self._porc_ult = self._porc_nue
         if self._porc_ult >= 100:
             self._finalizado = True
-            IOSistema.I().PrintLine('[OK]')
+            IOSistema().PrintLine('[OK]')
 
     #------------------------------------------------------------------------------------------
     def Finalizar(self):
         
         if not self._finalizado:
             self._finalizado = True
-            IOSistema.I().PrintLine('[OK]')
+            IOSistema().PrintLine('[OK]')
 
 
 #===================================================================================================
@@ -128,7 +128,7 @@ class ProgresoThreads:
     #------------------------------------------------------------------------------------------
     def __init__(self, nombre, claves):
 
-        self.io_nul = IOEscritor(IOSistema.I().DevNull())
+        self.io_nul = IOEscritor(IOSistema().DevNull())
         self.nombre = nombre
         self._contadores = dict()
         for clave in claves:

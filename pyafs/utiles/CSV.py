@@ -106,7 +106,7 @@ class CSVLector:
         info = {'reg_repetidos':[], 'reg_erroneos':[], 'info_repetidos':[], 'info_erroneos':[], }
 
         if not self._archivo.Existe():
-            Logger.I().Log('[ %s ] Error: El archivo no existe' % (self._archivo))
+            Logger().Log('[ %s ] Error: El archivo no existe' % (self._archivo))
             exit()
 
         self._datos.clear()
@@ -119,7 +119,7 @@ class CSVLector:
             self._reader = csv.reader(ior.Stream(), delimiter=self._delim, quotechar=self._quote)
     
             for hdr in self._reader:
-                self._header = Encoding.I().NormalizarLista([h.lower() for h in hdr]) 
+                self._header = Encoding().NormalizarLista([h.lower() for h in hdr]) 
                 break
     
             for dato in self._reader:
@@ -133,7 +133,7 @@ class CSVLector:
                     else:
                         info['reg_repetidos'].append(reg)
                         info['info_repetidos'].append(key)
-                    self._datos[key].append(Encoding.I().NormalizarLista(dato))
+                    self._datos[key].append(Encoding().NormalizarLista(dato))
                     
                 except Exception as e:
                     info['reg_erroneos'].append(reg)
@@ -158,9 +158,9 @@ class CSVEscritor:
         self._quoting = quoting
 
         if archivo_csv_output.Existe():
-            Logger.I().Log('[ %s ] Warning: El archivo ya existe' % (archivo_csv_output), False)
+            Logger().Log('[ %s ] Warning: El archivo ya existe' % (archivo_csv_output), False)
         if not archivo_csv_output.CarpetaPadre().Existe():
-            Logger.I().Log('[ %s ] Warning: La carpeta no existe, creando..' % (archivo_csv_output), False)
+            Logger().Log('[ %s ] Warning: La carpeta no existe, creando..' % (archivo_csv_output), False)
             archivo_csv_output.CarpetaPadre().Crear()
 
         self._writer = csv.writer(open(archivo_csv_output.Ruta(), 'wb'), delimiter=self._delim, quotechar=self._quote, quoting=self._quoting)
@@ -186,7 +186,7 @@ class CSVEscritor:
         for tdato in self._headerstruc:
             header.append(tdato.Nombre().lower())
 
-        header = Encoding.I().NormalizarLista(header)
+        header = Encoding().NormalizarLista(header)
         self._writer.writerow(header)
 
     #------------------------------------------------------------------------------------------
@@ -196,7 +196,7 @@ class CSVEscritor:
 
         for dato in datos:
             progreso.Incrementar()
-            dato = Encoding.I().NormalizarLista(dato)
+            dato = Encoding().NormalizarLista(dato)
             self._writer.writerow(dato)
         
     #------------------------------------------------------------------------------------------

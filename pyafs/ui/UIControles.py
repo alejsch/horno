@@ -80,7 +80,7 @@ class UISalida ():
     #------------------------------------------------------------------------------------------
     def PrintLine(self, texto):
         
-        self.Print(texto + IOSistema.I().NewLine())
+        self.Print(texto + IOSistema().NewLine())
 
     #------------------------------------------------------------------------------------------
     def Print(self, texto):

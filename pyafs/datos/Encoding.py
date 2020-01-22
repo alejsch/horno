@@ -72,7 +72,7 @@ class Encoding (metaclass=Singleton):
     #------------------------------------------------------------------------------------------
     def NormalizarLista(self, datos):
 
-        return [ Encoding.I().NormalizarTexto(t) for t in datos ]
+        return [ Encoding().NormalizarTexto(t) for t in datos ]
 
     #------------------------------------------------------------------------------------------
     def ToUnicode(self, dato, code='latin1'):

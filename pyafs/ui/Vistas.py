@@ -155,7 +155,7 @@ class VistaGraficaHelper:
         tbl.setHorizontalHeaderLabels(columnas)
         for n, fila in enumerate(filas):
             for i, d in enumerate(fila):
-                d_str = Encoding.I().ToUnicode(d, 'utf-8') if d else ''
+                d_str = Encoding().ToUnicode(d, 'utf-8') if d else ''
                 item = QtGui.QTableWidgetItem(d_str)
                 item.setToolTip(d_str)
                 tbl.setItem(n, i, item)
@@ -171,7 +171,7 @@ class VistaGraficaHelper:
             columnas = [self.AUnicode(tbl.horizontalHeaderItem(i).text()) for i in range(tbl.columnCount())]
             
             header = sep.join([quo + c.replace(quo, quo * 2) + quo for c in columnas])
-            io.write(Encoding.I().ToString(header + '\n'))
+            io.write(Encoding().ToString(header + '\n'))
             
             for f in range(tbl.rowCount()):
                 fila = []
@@ -180,7 +180,7 @@ class VistaGraficaHelper:
                     fila.append(self.AUnicode(item.text()) if item is not None else '')
                 
                 datos = sep.join([quo + d.replace(quo, quo * 2) + quo for d in fila])
-                io.write(Encoding.I().ToString(datos + '\n'))
+                io.write(Encoding().ToString(datos + '\n'))
                                 
     #------------------------------------------------------------------------------------------
     def ObtenerTabla(self, tbl):
@@ -245,5 +245,5 @@ class VistaConsolaBase (object):
     #------------------------------------------------------------------------------------------
     def Mostrar(self):
         
-        IOSistema.I().PrintLine('Hola, soy una VistaConsolaBase y me estoy mostrando')
+        IOSistema().PrintLine('Hola, soy una VistaConsolaBase y me estoy mostrando')
 
