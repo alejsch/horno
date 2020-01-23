@@ -1,8 +1,8 @@
 import sys
 
 from PyQt4 import QtGui, Qt, QtCore
-from pyafs.utiles.IO import IOSistema
-from pyafs.utiles.Singleton import Singleton
+from horno.utiles.IO import IOSistema
+from horno.utiles.Singleton import Singleton
 
 
 #=============================================================================================

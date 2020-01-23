@@ -1,7 +1,7 @@
 from queue import Queue
 from threading import Thread
 
-from pyafs.utiles.Singleton import Singleton
+from horno.utiles.Singleton import Singleton
 
 
 #===================================================================================================

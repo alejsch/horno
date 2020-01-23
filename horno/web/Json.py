@@ -1,8 +1,8 @@
 import json
 from urllib.parse import parse_qs
 
-from pyafs.utiles.IO import IOSistema
-from pyafs.utiles.Singleton import Singleton
+from horno.utiles.IO import IOSistema
+from horno.utiles.Singleton import Singleton
 import unidecode
 
 

@@ -1,5 +1,5 @@
-from pyafs.utiles.IO import IOEscritor, IOArchivo, IOSistema
-from pyafs.utiles.Singleton import Singleton
+from horno.utiles.IO import IOEscritor, IOArchivo, IOSistema
+from horno.utiles.Singleton import Singleton
 
 
 #================================================================================================

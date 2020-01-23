@@ -1,4 +1,4 @@
-from pyafs.datos.Fechas import Fecha
+from horno.datos.Fechas import Fecha
 
 #=============================================================================================
 class Dato:

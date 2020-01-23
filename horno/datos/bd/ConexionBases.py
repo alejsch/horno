@@ -1,12 +1,12 @@
 import datetime
 import os
 
-from pyafs.datos.Encoding import Encoding
-from pyafs.datos.TiposDeDatos import DatoStr
-from pyafs.datos.bd import dbfonpy
-from pyafs.utiles.CSV import CSVEscritor
-from pyafs.utiles.IO import IOSistema
-from pyafs.utiles.Metricas import Progreso
+from horno.datos.Encoding import Encoding
+from horno.datos.TiposDeDatos import DatoStr
+from horno.datos.bd import dbfonpy
+from horno.utiles.CSV import CSVEscritor
+from horno.utiles.IO import IOSistema
+from horno.utiles.Metricas import Progreso
 import xlrd
 
 import pyodbc

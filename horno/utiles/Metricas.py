@@ -1,7 +1,7 @@
 import datetime
 import time
 
-from pyafs.utiles.IO import IOEscritor, IOSistema
+from horno.utiles.IO import IOEscritor, IOSistema
 
 
 #===================================================================================================

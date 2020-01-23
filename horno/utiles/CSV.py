@@ -1,8 +1,8 @@
-from pyafs.datos.Encoding import Encoding
-from pyafs.datos.Registro import Registro
-from pyafs.utiles.IO import IOLector
-from pyafs.utiles.Logger import Logger
-from pyafs.utiles.Metricas import Progreso
+from horno.datos.Encoding import Encoding
+from horno.datos.Registro import Registro
+from horno.utiles.IO import IOLector
+from horno.utiles.Logger import Logger
+from horno.utiles.Metricas import Progreso
 import csv
 
 #=============================================================================================

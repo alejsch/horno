@@ -1,8 +1,8 @@
 import re
 
 from PyQt4 import QtGui, QtCore
-from pyafs.datos.Encoding import Encoding
-from pyafs.utiles.IO import IOSistema
+from horno.datos.Encoding import Encoding
+from horno.utiles.IO import IOSistema
 
 
 #==============================================================================================================================

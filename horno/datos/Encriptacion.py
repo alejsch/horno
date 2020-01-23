@@ -1,4 +1,4 @@
-from pyafs.utiles.IO import IOSistema
+from horno.utiles.IO import IOSistema
 
 #=============================================================================================
 class Crypt:

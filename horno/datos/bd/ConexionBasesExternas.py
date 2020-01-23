@@ -1,5 +1,5 @@
 
-from pyafs.datos.bd.ConexionBases import CxBase
+from horno.datos.bd.ConexionBases import CxBase
 
 
 #=============================================================================================

@@ -11,8 +11,8 @@ import sys
 from threading import Lock
 import traceback
 
-from pyafs.datos.Encoding import Encoding
-from pyafs.utiles.Singleton import Singleton
+from horno.datos.Encoding import Encoding
+from horno.utiles.Singleton import Singleton
 
 
 #==========================================================================================

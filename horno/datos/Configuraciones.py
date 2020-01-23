@@ -1,6 +1,6 @@
 from configparser import RawConfigParser
 
-from pyafs.utiles.IO import IOEscritor
+from horno.utiles.IO import IOEscritor
 
 
 #=============================================================================================

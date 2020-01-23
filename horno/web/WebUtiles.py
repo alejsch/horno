@@ -1,7 +1,7 @@
 import html
 
 import lxml.html
-from pyafs.utiles.Singleton import Singleton
+from horno.utiles.Singleton import Singleton
 
 
 #==============================================================================================

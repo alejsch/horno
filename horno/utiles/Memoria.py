@@ -1,5 +1,5 @@
 import psutil
-from pyafs.utiles.Singleton import Singleton
+from horno.utiles.Singleton import Singleton
 
 
 #==========================================================================================

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-1 -*-
 
-from pyafs.utiles.Singleton import Singleton
+from horno.utiles.Singleton import Singleton
 import unidecode
 
 

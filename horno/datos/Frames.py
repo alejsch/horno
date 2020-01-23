@@ -1,7 +1,7 @@
 import csv
 
 import pandas
-from pyafs.utiles.IO import IOArchivo
+from horno.utiles.IO import IOArchivo
 
 
 
