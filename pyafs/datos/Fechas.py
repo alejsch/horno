@@ -1,8 +1,10 @@
+from datetime import timedelta
 import datetime
 
-from dateutil import parser
+import dateutil.parser
 
 
+#=============================================================================================
 class Fecha:
 
     #------------------------------------------------------------------------------------------
@@ -16,9 +18,9 @@ class Fecha:
     #------------------------------------------------------------------------------------------
     def __cmp__(self, fecha):
         
-        if self.Date() < fecha.Date():
+        if self.get_val() < fecha.get_val():
             return -1
-        elif self.Date() > fecha.Date():
+        elif self.get_val() > fecha.get_val():
             return 1
         else:
             return 0
@@ -32,11 +34,6 @@ class Fecha:
     def __str__(self):
         
         return self.to_human()
-
-    #------------------------------------------------------------------------------------------
-    def Date(self):
-        
-        return self._fecha
 
     #------------------------------------------------------------------------------------------
     def Anio(self):
@@ -75,7 +72,7 @@ class Fecha:
     def DesdeIso(fecha_iso, default=None):
         
         try:
-            date = parser.parse(fecha_iso)
+            date = dateutil.parser.parse(fecha_iso)
         except Exception as e:
             date = default
         finally:
@@ -148,9 +145,14 @@ class Fecha:
         return self.AStringConFormato('%d/%m/%Y')
 
     #------------------------------------------------------------------------------------------
+    def to_iso(self):
+        
+        return self._fecha.isoformat()
+
+    #------------------------------------------------------------------------------------------
     def to_unix(self):
         
-        return self._fecha.timestamp()
+        return int(self._fecha.timestamp()*1000)
 
     #------------------------------------------------------------------------------------------
     def to_human(self, formato_out='%a %d %b %Y, %H:%M'):
@@ -168,3 +170,37 @@ class Fecha:
         except:
             return fecha_orig
 
+    #------------------------------------------------------------------------------------------
+    def add_delta(self, **kwargs):
+        
+        return Fecha(self._fecha + timedelta(**kwargs))
+
+    #------------------------------------------------------------------------------------------
+    def get_val(self):
+        
+        return self._fecha
+
+    #------------------------------------------------------------------------------------------
+    def get_date(self):
+
+        return Fecha(datetime.datetime(self.val.year, self.val.month, self.val.day))
+
+    #------------------------------------------------------------------------------------------
+    def set_date(self, **kwargs):
+        
+        return Fecha(self._fecha.replace(**kwargs))
+
+    #------------------------------------------------------------------------------------------
+    def diff(self, fecha):
+        
+        return abs(self._fecha - fecha._fecha)
+
+    #------------------------------------------------------------------------------------------
+    def is_past_now(self):
+        
+        return self._fecha.timestamp() < Fecha.Ahora().get_val().timestamp()
+
+    #------------------------------------------------------------------------------------------
+    def is_past_today(self):
+        
+        return self._fecha.date() < Fecha.Hoy().get_val().date()
