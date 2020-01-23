@@ -1,5 +1,8 @@
 *.pyc
 *.log
+*.egg-info
 .idea
 .pydevproject
 /.settings/org.eclipse.core.resources.prefs
+/build
+/dist
