@@ -1,8 +1,7 @@
 import csv
 
+from horno.utiles.IO import IOArchivo, IOLector
 import pandas
-from horno.utiles.IO import IOArchivo
-
 
 
 #===================================================================================================
@@ -26,10 +25,10 @@ class PandasFrame:
 
     #------------------------------------------------------------------------------------------
     @staticmethod
-    def cargar_csv(csv_path, quoting=csv.QUOTE_ALL, sep=',', header='infer'):
+    def cargar_csv(csv_path, quoting=csv.QUOTE_ALL, sep=',', header='infer', enc='utf-8'):
 
-        with open(csv_path, 'r') as ior:
-            pf = PandasFrame(pandas.read_csv(ior, quoting=quoting, sep=sep, header=header))
+        with IOLector(csv_path).Abrir(binario=False) as ior:
+            pf = PandasFrame(pandas.read_csv(ior.Stream(), quoting=quoting, sep=sep, header=header, encoding=enc))
         return pf
 
     #------------------------------------------------------------------------------------------

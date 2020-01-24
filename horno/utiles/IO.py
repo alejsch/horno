@@ -139,8 +139,13 @@ class IOSistema (metaclass=Singleton):
         
         return os.system('"%s/java" -Xms%s -Xmx%s -version > %s 2>&1' % (path, mem_min, mem_max, self.DevNull().Ruta())) == 0
 
+
     #------------------------------------------------------------------------------------------
-    def SetVariableEntorno(self, clave, valor):
+    def GetEnv(self, clave, default=None):
+        return os.environ.get(clave, default)
+
+    #------------------------------------------------------------------------------------------
+    def SetEnv(self, clave, valor):
         os.environ[clave] = valor
 
     #------------------------------------------------------------------------------------------
@@ -221,9 +226,9 @@ class IOLector:
         return self.handle
 
     #------------------------------------------------------------------------------------------
-    def Abrir(self, binario=True):
+    def Abrir(self, binario=True, enc='utf-8'):
         
-        self.handle = open(self.archivo.Ruta(), 'r' + ('b' if binario else ''))
+        self.handle = open(self.archivo.Ruta(), 'r' + ('b' if binario else ''), encoding=None if binario else enc)
         return self
         
     #------------------------------------------------------------------------------------------
@@ -282,9 +287,9 @@ class IOEscritor:
         return self.handle
     
     #------------------------------------------------------------------------------------------
-    def Abrir(self, append=True, binario=True):
+    def Abrir(self, append=True, binario=True, enc='utf-8'):
         
-        self.handle = open(self.archivo.Ruta(), ('a+' if append else 'w') + ('b' if binario else ''))
+        self.handle = open(self.archivo.Ruta(), ('a+' if append else 'w') + ('b' if binario else ''), encoding=None if binario else enc)
         return self
         
     #------------------------------------------------------------------------------------------
@@ -416,6 +421,11 @@ class IOArchivo:
         for s in ['/', '\\', '.']:
             res = res.replace(s, '_')
         return res
+
+    #------------------------------------------------------------------------------------------
+    @staticmethod
+    def PathFix(path):
+        return path.replace('\\', '/') if IOSistema().EnLinux() else path.replace('/', '\\')
     
     #------------------------------------------------------------------------------------------
     def RepararEncoding(self, normalizar=False):
