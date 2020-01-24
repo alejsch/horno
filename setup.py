@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="horno",
-    version="1.0.2",
+    version="1.0.2.10",
     author="afs",
     author_email="author@example.com",
     description="Lo que el cuerpo necesita",
@@ -19,6 +19,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'dateutil', 'bcrypt', 'passlib', 'unidecode', # 'lxml',
+        'python-dateutil', 'bcrypt', 'passlib', 'unidecode', # 'lxml',
     ],                 
 )

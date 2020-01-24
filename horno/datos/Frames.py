@@ -27,7 +27,7 @@ class PandasFrame:
     @staticmethod
     def cargar_csv(csv_path, quoting=csv.QUOTE_ALL, sep=',', header='infer', enc='utf-8'):
 
-        with IOLector(csv_path).Abrir(binario=False) as ior:
+        with IOLector.DeRuta(csv_path).Abrir(binario=False) as ior:
             pf = PandasFrame(pandas.read_csv(ior.Stream(), quoting=quoting, sep=sep, header=header, encoding=enc))
         return pf
 
@@ -123,9 +123,21 @@ class PandasFrame:
         return res
     
     #------------------------------------------------------------------------------------------
+    def get_groups(self, col):
+        
+        res = self.F.groupby(self.F[col])
+        return res
+    
+    #------------------------------------------------------------------------------------------
     def get_iterator(self):
         
         return self.F.iterrows()
+
+    #------------------------------------------------------------------------------------------
+    def get_by_cond(self, clave, valor):
+        
+        FR = self.F[self.F[clave] == valor]
+        return PandasFrame(FR)
     
     #------------------------------------------------------------------------------------------
     def to_dict_list(self, cols=None):

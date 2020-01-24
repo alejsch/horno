@@ -425,13 +425,13 @@ class IOArchivo:
     #------------------------------------------------------------------------------------------
     @staticmethod
     def PathFix(path):
-        return path.replace('\\', '/') if IOSistema().EnLinux() else path.replace('/', '\\')
+        return path.replace('\\', '/') if IOSistema().CheckSOEsLinux() else path.replace('/', '\\')
     
     #------------------------------------------------------------------------------------------
     def RepararEncoding(self, normalizar=False):
 
         with IOLector(self).Abrir() as ior:
-            datos = ior.Stream().read()
+            datos = ior.Leer()
 
         #volar caracteres nulos
         datos = datos.replace('\x00', '')

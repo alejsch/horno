@@ -68,11 +68,10 @@ class JsonHandler (metaclass=Singleton):
         return out_json
 
     #------------------------------------------------------------------------------------------
-    @staticmethod
-    def to_string(d, attr=None, ret=False):
+    def to_string(self, d, attr=None, ret=False):
 
         try:
-            out_json = JsonHandler.to_json(d, attr)
+            out_json = JsonHandler().to_json(d, attr)
             texto = json.dumps(out_json, indent=4, sort_keys=True)
         except Exception as exc:
             IOSistema().PrintLine('(X) [to_string] ERROR: %s' % (str(exc)))
@@ -84,8 +83,7 @@ class JsonHandler (metaclass=Singleton):
                 IOSistema().PrintLine(texto)
 
     #------------------------------------------------------------------------------------------
-    @staticmethod
-    def to_markdown(d, ret=False, nivel=0, lista=False):
+    def to_markdown(self, d, ret=False, nivel=0, lista=False):
 
         try:
             texto = ''
@@ -94,12 +92,12 @@ class JsonHandler (metaclass=Singleton):
                 texto += '%s%s\n' % (' ' * (nivel), d)
             elif isinstance(d, list):
                 for e in d:
-                    texto += JsonHandler.to_markdown(e, ret, nivel+espacios_gap, lista=True)
+                    texto += JsonHandler().to_markdown(e, ret, nivel+espacios_gap, lista=True)
             elif isinstance(d, dict):
                 for (dic_k, dic_v) in d.items():
                     espacios = len(dic_k) - len(dic_k.lstrip())
                     texto += '%s%s: %s' % (' ' * (nivel), dic_k, '' if isinstance(dic_v, str) else '\n')
-                    texto += JsonHandler.to_markdown(dic_v, ret, (nivel+espacios)+espacios_gap)
+                    texto += JsonHandler().to_markdown(dic_v, ret, (nivel+espacios)+espacios_gap)
         except Exception as exc:
             IOSistema().PrintLine('(X) [to_markdown] ERROR: %s' % (str(exc)))
         finally:

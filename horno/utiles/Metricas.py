@@ -1,46 +1,41 @@
 import datetime
 import time
 
+from horno.datos.Fechas import Fecha
 from horno.utiles.IO import IOEscritor, IOSistema
+from horno.utiles.Singleton import Singleton
 
 
 #===================================================================================================
-class Math:
+class Math (metaclass=Singleton):
     
     #------------------------------------------------------------------------------------------
-    @staticmethod
-    def Porcentaje(parcial, total):
+    def Porcentaje(self, parcial, total):
         return 0 if total == 0 else parcial * 100.0 / total
 
     #------------------------------------------------------------------------------------------
-    @staticmethod
-    def IntervaloNA(minimo, maximo, salto=1):
+    def IntervaloNA(self, minimo, maximo, salto=1):
         return range(minimo, maximo, salto)
 
     #------------------------------------------------------------------------------------------
-    @staticmethod
-    def IntervaloNC(minimo, maximo, salto=1):
-        return Math.IntervaloNA(minimo, maximo + 1, salto)
+    def IntervaloNC(self, minimo, maximo, salto=1):
+        return self.IntervaloNA(minimo, maximo + 1, salto)
 
     #------------------------------------------------------------------------------------------
-    @staticmethod
-    def Intervalo0A(maximo, salto=1):
-        return Math.IntervaloNA(0, maximo, salto)
+    def Intervalo0A(self, maximo, salto=1):
+        return self.IntervaloNA(0, maximo, salto)
 
     #------------------------------------------------------------------------------------------
-    @staticmethod
-    def Intervalo0C(maximo, salto=1):
-        return Math.IntervaloNC(0, maximo, salto)
+    def Intervalo0C(self, maximo, salto=1):
+        return self.IntervaloNC(0, maximo, salto)
 
     #------------------------------------------------------------------------------------------
-    @staticmethod
-    def Intervalo1A(maximo, salto=1):
-        return Math.IntervaloNA(1, maximo, salto)
+    def Intervalo1A(self, maximo, salto=1):
+        return self.IntervaloNA(1, maximo, salto)
 
     #------------------------------------------------------------------------------------------
-    @staticmethod
-    def Intervalo1C(maximo, salto=1):
-        return Math.IntervaloNC(1, maximo, salto)
+    def Intervalo1C(self, maximo, salto=1):
+        return self.IntervaloNC(1, maximo, salto)
     
 
 #===================================================================================================
@@ -86,13 +81,13 @@ class Performance:
     #------------------------------------------------------------------------------------------
     def Iniciar(self):
 
-        self.tiempo_ini = self.FechaAGMT(datetime.datetime.now())
+        self.tiempo_ini = self.FechaAGMT(Fecha.Ahora().get_val())
         IOSistema().PrintLine('(t) [%s] INI %s' % (self._msg, self.FechaAString(self.tiempo_ini)))
            
     #------------------------------------------------------------------------------------------
     def Finalizar(self):
 
-        self.tiempo_fin = self.FechaAGMT(datetime.datetime.now())
+        self.tiempo_fin = self.FechaAGMT(Fecha.Ahora().get_val())
         
         IOSistema().PrintLine('(t) [%s] FIN %s (%s)' % (self._msg, self.FechaAString(self.tiempo_fin), self.TimespanAString(self.tiempo_fin - self.tiempo_ini)))
 

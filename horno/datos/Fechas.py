@@ -183,7 +183,7 @@ class Fecha:
     #------------------------------------------------------------------------------------------
     def get_date(self):
 
-        return Fecha(datetime.datetime(self.val.year, self.val.month, self.val.day))
+        return Fecha(datetime.datetime(self.get_val().year, self.get_val().month, self.get_val().day))
 
     #------------------------------------------------------------------------------------------
     def set_date(self, **kwargs):
