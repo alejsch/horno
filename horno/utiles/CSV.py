@@ -114,7 +114,7 @@ class CSVLector:
 
         progreso = Progreso(5, self.ContarRegistros(), '[ %s ] Leyendo' % (self._archivo))
 
-        with IOLector(self._archivo).Abrir() as ior:
+        with IOLector(self._archivo).Abrir(binario=True) as ior:
         
             self._reader = csv.reader(ior.Stream(), delimiter=self._delim, quotechar=self._quote)
     

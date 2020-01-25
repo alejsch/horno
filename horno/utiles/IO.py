@@ -229,7 +229,7 @@ class IOLector:
         return self.handle
 
     #------------------------------------------------------------------------------------------
-    def Abrir(self, binario=True, enc='utf-8'):
+    def Abrir(self, binario=False, enc='utf-8'):
         
         self.handle = open(self.archivo.Ruta(), 'r' + ('b' if binario else ''), encoding=None if binario else enc)
         return self
@@ -290,7 +290,7 @@ class IOEscritor:
         return self.handle
     
     #------------------------------------------------------------------------------------------
-    def Abrir(self, append=True, binario=True, enc='utf-8'):
+    def Abrir(self, append=True, binario=False, enc='utf-8'):
         
         self.handle = open(self.archivo.Ruta(), ('a+' if append else 'w') + ('b' if binario else ''), encoding=None if binario else enc)
         return self
@@ -401,7 +401,7 @@ class IOArchivo:
         if not self.Existe():
             return 0
         
-        with IOLector(self).Abrir() as io:
+        with IOLector(self).Abrir(binario=True) as io:
             for i, _ in enumerate(io.Stream()): pass
         return i + 1
 
@@ -433,7 +433,7 @@ class IOArchivo:
     #------------------------------------------------------------------------------------------
     def RepararEncoding(self, normalizar=False):
 
-        with IOLector(self).Abrir() as ior:
+        with IOLector(self).Abrir(binario=True) as ior:
             datos = ior.Leer()
 
         #volar caracteres nulos
