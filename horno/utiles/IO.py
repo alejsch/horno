@@ -25,8 +25,9 @@ class IOSistema (metaclass=Singleton):
         self._salida = None
         self._en_docker = False
 
-        if self._en_linux:
-            with open('/proc/self/cgroup', 'r') as ior:
+        cgroup_file = '/proc/self/cgroup'
+        if self._en_linux and os.path.exists(cgroup_file):
+            with open(cgroup_file, 'r') as ior:
                 for line in ior:
                     if 'docker' in line.strip().split('/'):
                         self._en_docker = True
