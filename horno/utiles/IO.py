@@ -50,7 +50,7 @@ class IOSistema (metaclass=Singleton):
         while True:
             s = input('%s: ' % (msg))
             if s is not None and len(s.strip()) > 0:
-                return s.strip().upper()
+                return s.strip()
             if ask_once:
                 return ''
 
