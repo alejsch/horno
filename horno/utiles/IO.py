@@ -23,6 +23,14 @@ class IOSistema (metaclass=Singleton):
         self._en_linux = 'linux' in self.GetInfoSO().lower()
         self._en_py3 = sys.version_info > (3, 0)
         self._salida = None
+        self._en_docker = False
+
+        if self._en_linux:
+            with open('/proc/self/cgroup', 'r') as ior:
+                for line in ior:
+                    if 'docker' in line.strip().split('/'):
+                        self._en_docker = True
+                        break
         
     #------------------------------------------------------------------------------------------
     def Args(self):
@@ -37,11 +45,13 @@ class IOSistema (metaclass=Singleton):
         return getpass.getuser()
 
     #------------------------------------------------------------------------------------------
-    def Input(self, msg):
+    def Input(self, msg, ask_once=False):
         while True:
             s = input('%s: ' % (msg))
             if s is not None and len(s.strip()) > 0:
                 return s.strip().upper()
+            if ask_once:
+                return ''
 
     #------------------------------------------------------------------------------------------
     def PrintLine(self, texto):
@@ -112,14 +122,7 @@ class IOSistema (metaclass=Singleton):
 
     #------------------------------------------------------------------------------------------
     def CheckDocker(self):
-        if self.CheckSOEsLinux():
-            with open('/proc/self/cgroup', 'r') as ior:
-                for line in ior:
-                    if 'docker' in line.strip().split('/'):
-                        return True
-            return False
-        else:
-            return False
+        return self._en_docker
 
     #------------------------------------------------------------------------------------------
     def GetInfoSO(self):
@@ -138,7 +141,6 @@ class IOSistema (metaclass=Singleton):
         if not self.GetInfoJava(path): return False
         
         return os.system('"%s/java" -Xms%s -Xmx%s -version > %s 2>&1' % (path, mem_min, mem_max, self.DevNull().Ruta())) == 0
-
 
     #------------------------------------------------------------------------------------------
     def GetEnv(self, clave, default=None):

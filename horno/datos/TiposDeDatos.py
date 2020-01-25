@@ -20,6 +20,12 @@ class Dato:
         return None
 
     #------------------------------------------------------------------------------------------
+    def ParsearSafe(self, texto, default=None):
+        
+        parseo = self.Parsear(texto)
+        return parseo['res'] if parseo['valido'] else default
+
+    #------------------------------------------------------------------------------------------
     def Quotear(self, texto):
         
         return None

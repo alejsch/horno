@@ -1,4 +1,5 @@
 import datetime
+import random
 import time
 
 from horno.datos.Fechas import Fecha
@@ -37,6 +38,9 @@ class Math (metaclass=Singleton):
     def Intervalo1C(self, maximo, salto=1):
         return self.IntervaloNC(1, maximo, salto)
     
+    #------------------------------------------------------------------------------------------
+    def Random(self, valor_ini, valor_fin):
+        return random.randint(valor_ini, valor_fin)
 
 #===================================================================================================
 class Performance:
