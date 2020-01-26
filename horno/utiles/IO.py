@@ -288,6 +288,11 @@ class IOEscritor:
     def Stream(self):
         
         return self.handle
+
+    #------------------------------------------------------------------------------------------
+    def EnBinario(self):
+    
+        return 'b' in self.handle.mode if self.handle else False    
     
     #------------------------------------------------------------------------------------------
     def Abrir(self, append=True, binario=False, enc='utf-8'):
@@ -310,15 +315,15 @@ class IOEscritor:
         self.lock_w.acquire()
 
         msg = Encoding().NormalizarTexto(msg)
-        
         if newline:
-            msg_b = bytes('%s %s' % (msg, IOSistema().NewLine()), encoding='utf-8')
-            self.handle.write(msg_b)
-            if stdout:
-                IOSistema().PrintLine(msg)               
-        else:
-            self.handle.write(msg)
-            if stdout:
+            msg = '%s%s' % (msg, IOSistema().NewLine())
+
+        msg = bytes(msg, encoding='utf-8') if self.EnBinario() else msg
+        self.handle.write(msg)
+        if stdout:
+            if newline:
+                IOSistema().PrintLine(msg)
+            else:               
                 IOSistema().Print(msg)
                 
         self.lock_w.release()               
