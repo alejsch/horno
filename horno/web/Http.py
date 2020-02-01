@@ -1,5 +1,7 @@
 import html
 
+from horno.datos import Encoding
+from horno.utiles.IO import IOSistema
 from horno.utiles.Singleton import Singleton
 
 
@@ -24,6 +26,45 @@ class HtmlHelper (metaclass=Singleton):
         page_content = request.urlopen(req).read()
         page_elem = lxml.html.fromstring(page_content)
         return page_elem
+
+    #------------------------------------------------------------------------------------------
+    def ElemToString(self, elem):
+        
+        from lxml.etree import tostring
+        inner_html = tostring(elem)
+        return inner_html        
+
+    #------------------------------------------------------------------------------------------
+    def XPathSafeText(self, elem, paths, default=''):
+        
+        try:
+            if type(elem) in [str, bytes] or any([t in str(type(elem)) for t in ['_ElementStringResult', '_ElementUnicodeResult']]): 
+                return Encoding().NormalizarTexto(elem)
+            if not type(paths) == list: 
+                paths = [paths]
+            for path in paths:
+                res = elem.xpath(path)
+                if not res: continue
+                txt = Encoding().NormalizarTexto(res[0]).strip()
+                if not txt: continue
+                return txt
+            return default
+        except Exception as e:
+            IOSistema().PrintLine(e)
+            return '[ERROR-xpathtext]'
+
+    #------------------------------------------------------------------------------------------
+    def XPathSafeProp(self, elem, path, prop, default=''):
+
+        try:
+            res = elem.xpath(path)
+            if not res: return default
+            txt = Encoding().NormalizarTexto(res[0].get(prop))
+            return txt
+        except Exception as e:
+            IOSistema().PrintLine(e)
+            return '[ERROR-xpathprop]'
+        
 
 
 #==============================================================================================
