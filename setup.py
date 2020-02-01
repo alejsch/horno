@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="horno",
-    version="1.0.2.22",
+    version="1.0.2.23",
     author="afs",
     author_email="author@example.com",
     description="Lo que el cuerpo necesita",

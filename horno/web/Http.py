@@ -1,8 +1,8 @@
-import html
-
-from horno.datos import Encoding
+from horno.datos.Encoding import Encoding
 from horno.utiles.IO import IOSistema
 from horno.utiles.Singleton import Singleton
+import html
+import re
 
 
 #==============================================================================================
@@ -16,22 +16,28 @@ class HtmlHelper (metaclass=Singleton):
     #------------------------------------------------------------------------------------------
     def CargarUrl(self, url):
 
-        import lxml.html
+        from lxml import etree, html
+        from urllib import request
 
         url_partes = url.split('://', 2)
         url = '%s://%s' % (url_partes[0], url_partes[-1].replace('//', '/'))
 
-        from urllib import request
         req = request.Request(url, headers={'User-Agent' : "Magic Browser"})
         page_content = request.urlopen(req).read()
-        page_elem = lxml.html.fromstring(page_content)
+        page_content = re.sub(b'\<\!\[CDATA\[(.+)\]\]\>', br'\1', page_content)
+        page_elem = html.fromstring(page_content)
+        
+        #parser = etree.XMLParser(strip_cdata=False)
+        #page_elem = etree.XML(page_content, parser)
+        
         return page_elem
 
     #------------------------------------------------------------------------------------------
     def ElemToString(self, elem):
         
-        from lxml.etree import tostring
-        inner_html = tostring(elem)
+        from lxml import etree
+        
+        inner_html = etree.tostring(elem)
         return inner_html        
 
     #------------------------------------------------------------------------------------------
