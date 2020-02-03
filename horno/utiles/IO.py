@@ -295,7 +295,7 @@ class IOEscritor:
         return 'b' in self.handle.mode if self.handle else False    
     
     #------------------------------------------------------------------------------------------
-    def Abrir(self, append=True, binario=False, enc='utf-8'):
+    def Abrir(self, append=False, binario=False, enc='utf-8'):
         
         self.handle = open(self.archivo.Ruta(), ('a+' if append else 'w') + ('b' if binario else ''), encoding=None if binario else enc)
         return self
@@ -334,13 +334,13 @@ class IOEscritor:
         self.Escribir(msg, stdout, True)
 
     #------------------------------------------------------------------------------------------
-    def EscribirExpress(self, msg, append=True, stdout=False):
+    def EscribirExpress(self, msg, append=False, stdout=False):
         
         self.lock_o.acquire()
         
         self.Abrir(append)
         self.EscribirLinea(msg, stdout)
-        self.Cerrar()               
+        self.Cerrar()
 
         self.lock_o.release()
         
