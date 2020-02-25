@@ -148,7 +148,7 @@ class DatoStr (Dato):
 class DatoEnum (Dato):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre=None, nulo=False, enums, lon=0):
+    def __init__(self, nombre=None, nulo=False, enums=[], lon=0):
         
         Dato.__init__(self, nombre, nulo)
         self._enums = enums
