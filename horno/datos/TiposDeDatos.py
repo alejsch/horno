@@ -4,7 +4,7 @@ from horno.datos.Fechas import Fecha
 class Dato:
     
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo):
+    def __init__(self, nombre=None, nulo=False):
         
         self._nombre = nombre
         self._nulo = nulo
@@ -39,7 +39,7 @@ class Dato:
 class DatoInt (Dato):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo, lon_ent=0):
+    def __init__(self, nombre=None, nulo=False, lon_ent=0):
         
         Dato.__init__(self, nombre, nulo)
         self._lon_ent = lon_ent
@@ -75,7 +75,7 @@ class DatoInt (Dato):
 class DatoFlo (Dato):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo, lon_ent=0, lon_dec=0, con_coma=False):
+    def __init__(self, nombre=None, nulo=False, lon_ent=0, lon_dec=0, con_coma=False):
         
         Dato.__init__(self, nombre, nulo)
         self._lon_ent = lon_ent
@@ -116,7 +116,7 @@ class DatoFlo (Dato):
 class DatoStr (Dato):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo, lon=0):
+    def __init__(self, nombre=None, nulo=False, lon=0):
         
         Dato.__init__(self, nombre, nulo)
         self._lon = lon
@@ -148,7 +148,7 @@ class DatoStr (Dato):
 class DatoEnum (Dato):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo, enums, lon=0):
+    def __init__(self, nombre=None, nulo=False, enums, lon=0):
         
         Dato.__init__(self, nombre, nulo)
         self._enums = enums
@@ -181,7 +181,7 @@ class DatoEnum (Dato):
 class DatoFec (Dato):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo, es_edad=False, formato_in='%d/%m/%Y', formato_out='%d/%m/%Y'):
+    def __init__(self, nombre=None, nulo=False, es_edad=False, formato_in='%d/%m/%Y', formato_out='%d/%m/%Y'):
         
         Dato.__init__(self, nombre, nulo)
         self._es_edad = es_edad
@@ -227,7 +227,7 @@ class DatoFec (Dato):
 class DatoFecAnio (DatoFec):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo, es_edad=False, formato='%d/%m/%Y'):
+    def __init__(self, nombre=None, nulo=False, es_edad=False, formato='%d/%m/%Y'):
         
         DatoFec.__init__(self, nombre, nulo, es_edad, formato)
 
@@ -257,7 +257,7 @@ class DatoFecAnio (DatoFec):
 class DatoBool (DatoEnum):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo):
+    def __init__(self, nombre=None, nulo=False):
         
         DatoEnum.__init__(self, nombre, nulo, ['S', 'N'])
         
@@ -284,7 +284,7 @@ class DatoBool (DatoEnum):
 class DatoAlfanum (Dato):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo, lon=0):
+    def __init__(self, nombre=None, nulo=False, lon=0):
         
         Dato.__init__(self, nombre, nulo)
         self._lon = lon
@@ -316,7 +316,7 @@ class DatoAlfanum (Dato):
 class DatoDNI (DatoAlfanum):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo, lon=15):
+    def __init__(self, nombre=None, nulo=False, lon=15):
         
         DatoAlfanum.__init__(self, nombre, nulo, lon)
 
@@ -329,7 +329,7 @@ class DatoDNI (DatoAlfanum):
 class DatoCuit (DatoInt):
 
     #------------------------------------------------------------------------------------------
-    def __init__(self, nombre, nulo, lon=11, con_guion=False):
+    def __init__(self, nombre=None, nulo=False, lon=11, con_guion=False):
         
         DatoInt.__init__(self, nombre, nulo, lon)
         self._con_guion = con_guion
