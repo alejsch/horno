@@ -325,7 +325,8 @@ class IOEscritor:
         if stdout:
             IOSistema().PrintWith(msg, newline)
 
-        msg = '%s%s' % (msg, IOSistema().NewLine() if newline else '')
+        #msg = '%s%s' % (msg, IOSistema().NewLine() if newline else '')
+        msg = '%s%s' % (msg, '\n' if newline else '')
         msg = bytes(msg, encoding='utf-8') if self.EnBinario() else msg
         self.handle.write(msg)
                                 
