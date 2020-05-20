@@ -55,6 +55,13 @@ class IOSistema (metaclass=Singleton):
                 return ''
 
     #------------------------------------------------------------------------------------------
+    def PrintWith(self, texto, newline=True):
+        if newline:
+            IOSistema().PrintLine(texto)
+        else:               
+            IOSistema().Print(texto)
+
+    #------------------------------------------------------------------------------------------
     def PrintLine(self, texto):
         if self._salida is None:
             try:
@@ -315,17 +322,13 @@ class IOEscritor:
         self.lock_w.acquire()
 
         msg = Encoding().NormalizarTexto(msg)
-        if newline:
-            msg = '%s%s' % (msg, IOSistema().NewLine())
+        if stdout:
+            IOSistema().PrintWith(msg, newline)
 
+        msg = '%s%s' % (msg, IOSistema().NewLine() if newline else '')
         msg = bytes(msg, encoding='utf-8') if self.EnBinario() else msg
         self.handle.write(msg)
-        if stdout:
-            if newline:
-                IOSistema().PrintLine(msg)
-            else:               
-                IOSistema().Print(msg)
-                
+                                
         self.lock_w.release()               
 
     #------------------------------------------------------------------------------------------
