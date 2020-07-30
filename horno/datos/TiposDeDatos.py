@@ -195,12 +195,7 @@ class DatoFec (Dato):
             return {'valido':True, 'res':texto, 'error':''} if self._nulo else {'valido':False, 'res':texto, 'error':'nulo'} 
 
         fecha = Fecha.DesdeString(texto, self._formato_in)
-        if not fecha.Date() is None:
-            #fix para poder migrar si anios<15, se debe arreglar en tablas de input
-            if self._es_edad and Fecha.Ahora().Anio() - fecha.Anio() < 15:
-                fecha = Fecha.DesdeValores(1900, 1, 1)
-                texto = fecha.AStringConFormatoDefault()
-                 
+        if not fecha.get_val() is None:
             return {'valido':True, 'res':texto, 'error':''}
         else:
             return {'valido':False, 'res':texto, 'error':'"%s" != fecha (%s)' % (texto, self._formato_in)}
