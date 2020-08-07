@@ -196,7 +196,7 @@ class DatoFec (Dato):
 
         fecha = Fecha.DesdeString(texto, self._formato_in)
         if not fecha.get_val() is None:
-            return {'valido':True, 'res':texto, 'error':''}
+            return {'valido':True, 'res':fecha, 'error':''}
         else:
             return {'valido':False, 'res':texto, 'error':'"%s" != fecha (%s)' % (texto, self._formato_in)}
 
