@@ -1,7 +1,6 @@
 from horno.datos.Encoding import Encoding
 from horno.datos.Registro import Registro
-from horno.utiles.IO import IOLector
-from horno.utiles.Logger import Logger
+from horno.utiles.IO import IOLector, IOSistema
 from horno.utiles.Metricas import Progreso
 import csv
 
@@ -106,7 +105,7 @@ class CSVLector:
         info = {'reg_repetidos':[], 'reg_erroneos':[], 'info_repetidos':[], 'info_erroneos':[], }
 
         if not self._archivo.Existe():
-            Logger().Log('[ %s ] Error: El archivo no existe' % (self._archivo))
+            IOSistema().PrintLine('[ %s ] Error: El archivo no existe' % (self._archivo))
             exit()
 
         self._datos.clear()
@@ -158,9 +157,9 @@ class CSVEscritor:
         self._quoting = quoting
 
         if archivo_csv_output.Existe():
-            Logger().Log('[ %s ] Warning: El archivo ya existe' % (archivo_csv_output), False)
+            IOSistema().PrintLine('[ %s ] Warning: El archivo ya existe' % (archivo_csv_output))
         if not archivo_csv_output.CarpetaPadre().Existe():
-            Logger().Log('[ %s ] Warning: La carpeta no existe, creando..' % (archivo_csv_output), False)
+            IOSistema().PrintLine('[ %s ] Warning: La carpeta no existe, creando..' % (archivo_csv_output))
             archivo_csv_output.CarpetaPadre().Crear()
 
         self._writer = csv.writer(open(archivo_csv_output.Ruta(), 'wb'), delimiter=self._delim, quotechar=self._quote, quoting=self._quoting)

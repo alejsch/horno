@@ -1,11 +1,13 @@
 import setuptools
 
+import horno
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="horno",
-    version="1.0.2.31",
+    name=horno.name,
+    version=horno.version,
     author="afs",
     author_email="author@example.com",
     description="Lo que el cuerpo necesita",
