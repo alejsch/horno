@@ -80,10 +80,14 @@ class Fecha:
 
     #------------------------------------------------------------------------------------------
     @staticmethod
-    def DesdeUnix(fecha_unix, default=None):
+    def DesdeUnix(fecha_unix, default=None, utc=False):
         
         try:
-            date = datetime.datetime.utcfromtimestamp(int(fecha_unix)/1000)
+            fecha_unix_ok = int(fecha_unix)/1000
+            if utc:
+                date = datetime.datetime.utcfromtimestamp(fecha_unix_ok)
+            else:
+                date = datetime.datetime.fromtimestamp(fecha_unix_ok)
         except Exception as e:
             date = default
         finally:
